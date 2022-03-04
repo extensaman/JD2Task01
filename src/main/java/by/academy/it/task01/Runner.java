@@ -1,5 +1,14 @@
 package by.academy.it.task01;
 
+import by.academy.it.task01.fileworker.FileWorker;
+import by.academy.it.task01.fileworker.FileWorkerException;
+import by.academy.it.task01.fileworker.TextFileWorker;
+import by.academy.it.task01.service.TextParser;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collection;
+
 /**
  * Create a java application that will read data from a source
  * ("in.txt" file) and sort them. The data has a tabular structure.
@@ -26,7 +35,28 @@ package by.academy.it.task01;
  */
 
 public class Runner {
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+
+        File file = new File("src/main/resources/in.txt");
+        FileWorker<String> fileWorker = new TextFileWorker();
+        Collection<String> strings = null;
+        try {
+            strings = fileWorker.readCollection(file);
+        } catch (FileWorkerException e) {
+            e.printStackTrace();
+        }
+
+        strings.forEach(System.out::println);
+
+        Collection<String[]> collection = TextParser.parseSentencetoAllWord(strings);
+        for (String[] strings1 : collection) {
+            System.out.println(strings1.length);
+            for (String s : strings1) {
+                System.out.print(s + "-");
+            }
+            System.out.println();
+        }
+
     }
 }
