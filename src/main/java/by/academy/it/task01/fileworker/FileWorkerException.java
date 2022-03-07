@@ -1,6 +1,6 @@
 package by.academy.it.task01.fileworker;
 
-public class FileWorkerException extends Exception{
+public class FileWorkerException extends Exception {
     public FileWorkerException() {
     }
 
